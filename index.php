@@ -18,13 +18,23 @@
 <main>
 <h2>Practice</h2>
 <pre>
-    <?php
-    try {
-        $db = new PDO('mysql:dbname=mydb;host=127.0.0.1;charset=utf8','root','');
-    } catch (PDOException $e) {
-        echo 'DB接続エラー:' . $e->getMessage();
-    }
-    ?>
+<?php
+try {
+    $db = new PDO('mysql:dbname=mydb;host=127.0.0.1;charset=utf8','root','');
+} catch (PDOException $e) {
+    echo 'DB接続エラー:' . $e->getMessage();
+}
+
+//    $count = $db->exec('INSERT INTO my_items SET maker_id=1,item_name="もも",price=210,keyword="缶詰、ピンク、甘い"');
+//    echo ($count . "件のデータを挿入しました");
+//    echo (" $count 件のデータを挿入しました");
+
+$records = $db->query('SELECT * FROM my_items');
+while ($record = $records->fetch()){
+    print ($record['item_name'] . "\n");
+}
+
+?>
 </pre>
 </main>
 </body>
