@@ -21,11 +21,15 @@
     <?php
     try {
     $db = new PDO('mysql:dbname=mydb;host=127.0.0.1;charset=utf8','root','');
-
+    $statement = $db->prepare('INSERT INTO memos SET memo=?,created_at=NOW()');
+//    $statement->execute(array($_POST['memo']));
+    $statement->bindParam(1,$_POST['memo']);
+    $statement->execute();
+    echo 'メッセージが登録されました';
+//    $db->exec('INSERT INTO memos SET memo="' . $_POST['memo'] . '",created_at=NOW()');
     } catch (PDOException $e) {
         echo 'DB接続エラー:' . $e->getMessage();
     }
-
 
 
     ?>
